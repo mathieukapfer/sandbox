@@ -1,0 +1,11 @@
+(defmacro choice (&rest items)
+  (list 'format-choice (list items)))
+
+(macroexpand '(choice "a" "b" ) )
+
+(defun format-choice (str-list)
+  (concat "\\(?:"
+          (mapconcat 'identity str-list "\\|" )
+          "\\)"
+          )
+  )

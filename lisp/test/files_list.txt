@@ -1,0 +1,9 @@
+.
+./rep2
+./rep2/file2.txt
+./error_msg~
+./rep1
+./rep1/file1~
+./rep1/file1.txt
+./files_list.txt
+./error_msg

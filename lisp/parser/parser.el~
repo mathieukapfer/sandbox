@@ -1,0 +1,13 @@
+
+;; static EvseModel* inst();
+
+
+(defconst alphanum "[A-Za-z_0-9]+")
+(defconst sep "[ \t\n]+")
+(defconst sep0 "[ \t\n]*")
+
+
+(defconst cpp-function-declaration
+  '(cpp-highlight-buffer
+    
+                                     
