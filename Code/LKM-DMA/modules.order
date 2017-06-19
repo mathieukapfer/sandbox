@@ -1,0 +1,3 @@
+kernel//home/user/Code/LKM-DMA/at91_adc_with_pdc.ko
+kernel//home/user/Code/LKM-DMA/at91_adc_noIRQ.ko
+kernel//home/user/Code/LKM-DMA/at91_adc_ref.ko

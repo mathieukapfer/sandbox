@@ -1,0 +1,2 @@
+/home/user/Code/qt/object3/CMakeFiles/helloworld.dir
+/home/user/Code/qt/object3/CMakeFiles/helloworld_automoc.dir

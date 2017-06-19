@@ -1,0 +1,5 @@
+autoreconf --install
+cd build; ../configure --prefix=`pwd`/install
+make && make install
+echo `pwd`
+LD_PRELOAD="`pwd`/install/lib/libmymalloc.so" install/bin/mytest

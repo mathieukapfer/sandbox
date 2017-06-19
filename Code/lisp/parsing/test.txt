@@ -1,0 +1,14 @@
+0230|Io_CPW:558                0595.3377 [INFO ][IO][CPW]             GetCPW1Voltage: 11497 milivolts (787)
+0230|Io_CPW:539                0595.3449 [DEBUG][IO][CPW]             GetCPW2Voltage: 2227 milivolts (ADC:675),
+0230|Io_CPW:558                0595.3459 [INFO ][IO][CPW]             GetCPW1Voltage: 10445 milivolts (715)
+0230|Io_CPW:525                0595.3465 [WARN ][IO][CPW]             GetEVState: voltage out of range:10445 mV
+0230|Io_CPW:330                0595.3481 [INFO ][IO][CPW]             UpdateEVState KO: last value is:10445 mV
+0230|Io_CPW:539                0595.3499 [DEBUG][IO][CPW]             GetCPW2Voltage: 2224 milivolts (ADC:674),
+0230|Io_CPW:558                0595.3507 [INFO ][IO][CPW]             GetCPW1Voltage: 9452 milivolts (647)
+0230|Io_CPW:330                0595.3513 [INFO ][IO][CPW]             UpdateEVState KO: last value is:9452 mV
+0232|Metering_Sensor:94        0595.3582 [INFO ][EM][SENSOR]          GetPowerInKw_internal exits (power:0.000000)
+0232|Metering_Sensor:94        0595.3598 [INFO ][EM][SENSOR]          GetPowerInKw_internal exits (power:0.000000)
+0232|Metering_Sensor:94        0595.3609 [INFO ][EM][SENSOR]          GetPowerInKw_internal exits (power:0.000000)
+0230|Io_CPW:539                0595.3648 [DEBUG][IO][CPW]             GetCPW2Voltage: 2224 milivolts (ADC:674),
+0230|Io_CPW:268                0597.5592 [INFO ][IO][CPW]             UpdateEVStatePresenceM12 KO: last value is:false
+n

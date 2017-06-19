@@ -1,0 +1,50 @@
+/*test_prodB.sm:1:*/%class   TestB
+/*test_prodB.sm:2:*/%header  TestB.h
+/*test_prodB.sm:3:*/%start   common::Init
+/*test_prodB.sm:4:*/%package ProdB
+/*test_prodB.sm:5:*/
+/*test_prodB.sm:6:*///%include type_model.h
+/*test_prodB.sm:7:*/
+/*test_prodB.sm:8:*/%map prod
+/*test_prodB.sm:9:*/%%
+/*test_prodB.sm:10:*/
+/*test_prodB.sm:11:*/Inside
+/*test_prodB.sm:12:*/{
+/*test_prodB.sm:13:*/    goState2 InsideState2 { say("[B] go to sub state 2");}
+/*test_prodB.sm:14:*/}
+/*test_prodB.sm:15:*/
+/*test_prodB.sm:16:*/InsideState2
+/*test_prodB.sm:17:*/{    
+/*test_prodB.sm:18:*/}
+/*test_prodB.sm:19:*/
+/*test_prodB.sm:20:*/Default
+/*test_prodB.sm:21:*/{
+/*test_prodB.sm:22:*/  goBack pop { say("[B] back to main");}
+/*test_prodB.sm:23:*/}
+/*test_prodB.sm:24:*/
+/*test_prodB.sm:25:*/%%
+/*test_common.sm:1:*/%map common
+/*test_common.sm:2:*/%%
+/*test_common.sm:3:*/
+/*test_common.sm:4:*/Init
+/*test_common.sm:5:*/Entry { sayEntry("Common Init"); }
+/*test_common.sm:6:*/Exit { sayExit("Common Init"); }
+/*test_common.sm:7:*/{
+/*test_common.sm:8:*/  leaveInit Finish {}
+/*test_common.sm:9:*/  //goInside  push(prod::Inside) {}
+/*test_common.sm:10:*/  goInside  InsideSubmap/push(prod::Inside) {}
+/*test_common.sm:11:*/}
+/*test_common.sm:12:*/
+/*test_common.sm:13:*/InsideSubmap
+/*test_common.sm:14:*/Entry { sayEntry("InsideSubmap"); }
+/*test_common.sm:15:*/Exit { sayExit("InsideSubmap"); }
+/*test_common.sm:16:*/{
+/*test_common.sm:17:*/}
+/*test_common.sm:18:*/
+/*test_common.sm:19:*/
+/*test_common.sm:20:*/Finish
+/*test_common.sm:21:*/{
+/*test_common.sm:22:*/  backToInit Init {} 
+/*test_common.sm:23:*/}
+/*test_common.sm:24:*/
+/*test_common.sm:25:*/%%

@@ -1,0 +1,16 @@
+#!/bin/bash
+val1=`cat val1`
+val2=`cat val2`
+echo val1: $val1
+echo val2: $val2
+
+# compare
+if [ $val1 -eq $val2 ];
+then echo EQUAL;
+else echo NOT EQUAL
+fi
+
+# compute
+res=$(echo "$val2*10" | bc)
+echo $res
+echo $(echo "$val2*10" | bc)

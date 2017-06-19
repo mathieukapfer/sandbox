@@ -1,0 +1,814 @@
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #####
+done
+Bytes transferred = 2021440 (1ed840 hex)
+
+NAND read: device 0 offset 2621440, size 12582912 ...
+
+OK
+## Booting image at 21100000 ...
+   Image Name:   Linux-4.4.14
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    2021376 Bytes =  1.9 MB
+   Load Address: 20008000
+   Entry Point:  20008000
+   Verifying Checksum ... OK
+OK
+
+Starting kernel ...
+
+Booting Linux on physical CPU 0x0
+Linux version 4.4.14 (mathieu@debian-mathieu) (gcc version 4.9.3 (Buildroot 2016.05-00002-g75e57cb) ) #3 Mon Aug 29 18:18:53 CEST 2016
+CPU: ARM926EJ-S [41069265] revision 5 (ARMv5TEJ), cr=0005317f
+CPU: VIVT data cache, VIVT instruction cache
+Machine model: Parking Board v2_1
+Memory policy: Data cache writeback
+On node 0 totalpages: 32768
+free_area_init_node: node 0, pgdat c03d8dec, node_mem_map c7efb000
+  Normal zone: 256 pages used for memmap
+  Normal zone: 0 pages reserved
+  Normal zone: 32768 pages, LIFO batch:7
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32512
+Kernel command line: rootfstype=ext2 mem=128M console=ttyS0,115200 debug initrd=0x22800000,20M root=/dev/ram0 rw ramdisk_size=32768
+PID hash table entries: 512 (order: -1, 2048 bytes)
+Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+Memory: 105296K/131072K available (2668K kernel code, 117K rwdata, 944K rodata, 176K init, 95K bss, 25776K reserved, 0K cma-reserved)
+Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
+    vmalloc : 0xc8800000 - 0xff800000   ( 880 MB)
+    lowmem  : 0xc0000000 - 0xc8000000   ( 128 MB)
+    modules : 0xbf000000 - 0xc0000000   (  16 MB)
+      .text : 0xc0008000 - 0xc038f790   (3614 kB)
+      .init : 0xc0390000 - 0xc03bc000   ( 176 kB)
+      .data : 0xc03bc000 - 0xc03d95c0   ( 118 kB)
+       .bss : 0xc03d95c0 - 0xc03f1440   (  96 kB)
+NR_IRQS:16 nr_irqs:16 16
+clocksource: pit: mask: 0x7ffffff max_cycles: 0x7ffffff, max_idle_ns: 10387284962 ns
+sched_clock: 32 bits at 100 Hz, resolution 10000000ns, wraps every 21474836475000000ns
+Console: colour dummy device 80x30
+Calibrating delay loop... 91.54 BogoMIPS (lpj=457728)
+pid_max: default: 32768 minimum: 301
+Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+CPU: Testing write buffer coherency: ok
+Setting up static identity map for 0x20008400 - 0x20008458
+devtmpfs: initialized
+clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+pinctrl core: initialized pinctrl subsystem
+NET: Registered protocol family 16
+DMA: preallocated 256 KiB pool for atomic coherent allocations
+AT91: Detected SoC: at91sam9g20, revision 1
+No ATAGs?
+gpio-at91 fffff400.gpio: at address c885e400
+gpio-at91 fffff600.gpio: at address c8860600
+gpio-at91 fffff800.gpio: at address c8862800
+pinctrl-at91 ahb:apb:pinctrl@fffff400: initialized AT91 pinctrl driver
+i2c-gpio i2c@0: using pins 23 (SDA) and 24 (SCL)
+clocksource: Switched to clocksource pit
+NET: Registered protocol family 2
+TCP established hash table entries: 1024 (order: 0, 4096 bytes)
+TCP bind hash table entries: 1024 (order: 0, 4096 bytes)
+TCP: Hash tables configured (established 1024 bind 1024)
+UDP hash table entries: 256 (order: 0, 4096 bytes)
+UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+NET: Registered protocol family 1
+Trying to unpack rootfs image as initramfs...
+rootfs image is not initramfs (no cpio magic); looks like an initrd
+Freeing initrd memory: 20480K (c2800000 - c3c00000)
+futex hash table entries: 256 (order: -1, 3072 bytes)
+jffs2: version 2.2. (NAND) Â© 2001-2006 Red Hat, Inc.
+NET: Registered protocol family 38
+io scheduler noop registered (default)
+fffff200.serial: ttyS0 at MMIO 0xfffff200 (irq = 16, base_baud = 5750000) is a ATMEL_SERIAL
+console [ttyS0] enabled
+fffb0000.serial: ttyS1 at MMIO 0xfffb0000 (irq = 30, base_baud = 5750000) is a ATMEL_SERIAL
+fffb4000.serial: ttyS2 at MMIO 0xfffb4000 (irq = 31, base_baud = 5750000) is a ATMEL_SERIAL
+brd: module loaded
+loop: module loaded
+ssc fffbc000.ssc: Atmel SSC device at 0xc88e8000 (irq 33)
+atmel_nand 40000000.nand: No DMA support for NAND access.
+nand: device found, Manufacturer ID: 0x2c, Chip ID: 0xf1
+nand: Micron MT29F1G08ABADAWP
+nand: 128 MiB, SLC, erase size: 128 KiB, page size: 2048, OOB size: 64
+Scanning device for bad blocks
+7 ofpart partitions found on MTD device atmel_nand
+Creating 7 MTD partitions on "atmel_nand":
+0x000006000000-0x000008000000 : "apps"
+0x000001400000-0x000006000000 : "database"
+0x000000000000-0x000000020000 : "at91bootstrap"
+0x000000020000-0x000000060000 : "uboot"
+0x000000060000-0x000000080000 : "ubootenv"
+0x000000080000-0x000000280000 : "kernel"
+0x000000280000-0x000001400000 : "ramdisk"
+atmel_spi fffc8000.spi: version: 0x199
+atmel_spi fffc8000.spi: Atmel SPI Controller at 0xfffc8000 (irq 34)
+libphy: Fixed MDIO Bus: probed
+spi-ks8995 spi32766.0: KS8995 device found, Chip ID:0, Revision:4
+macb fffc4000.ethernet eth0: We have fixed-link PHY
+macb fffc4000.ethernet eth0: Cadence MACB rev 0x0001010c at 0xfffc4000 irq 32 (00:80:f4:42:2d:0c)
+macb fffc4000.ethernet eth0: attached PHY driver [Generic PHY] (mii_bus:phy_addr=fixed-0:00, irq=-1)
+rtc-at91sam9 fffffd20.rtc: rtc core: registered fffffd20.rtc as rtc0
+rtc-at91sam9 fffffd20.rtc: rtc0: SET TIME!
+i2c /dev entries driver
+AT91: Starting after watchdog reset
+at91_wdt fffffd40.watchdog: watchdog is disabled
+at91_wdt: probe of fffffd40.watchdog failed with error -22
+drivers/iio/adc/at91_adc.c:1131/at91_adc_probe
+drivers/iio/adc/at91_adc.c:863/at91_adc_probe_dt
+drivers/iio/adc/at91_adc.c:734/at91_adc_of_get_resolution
+iio iio:device0: Resolution used: 10 bits
+iio iio:device0: not support touchscreen in the adc compatible string.
+at91_adc fffe0000.adc: Master clock is set as: 92000000 Hz, adc_clk should set as: 5000000 Hz
+drivers/iio/adc/at91_adc.c:786/calc_startup_ticks_9260
+drivers/iio/adc/at91_adc.c:464/at91_adc_channel_init
+drivers/iio/adc/at91_adc.c:674/at91_adc_buffer_init
+drivers/iio/adc/at91_adc.c:624/at91_adc_trigger_init
+drivers/iio/adc/at91_adc.c:603/at91_adc_allocate_trigger
+drivers/iio/adc/at91_adc.c:603/at91_adc_allocate_trigger
+drivers/iio/adc/at91_adc.c:603/at91_adc_allocate_trigger
+drivers/iio/adc/at91_adc.c:603/at91_adc_allocate_trigger
+rtc-at91sam9 fffffd20.rtc: hctosys: unable to read the hardware clock
+RAMDISK: gzip image found at block 0
+VFS: Mounted root (ext2 filesystem) on device 1:0.
+devtmpfs: mounted
+Freeing unused kernel memory: 176K (c0390000 - c03bc000)
+Starting logging: OK
+Initializing random number generator... random: dd urandom read with 14 bits of entropy available
+done.
+starting busybox watchdog... done.
+mounting system partition...
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x360000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1ff24 bytes from 0x3600dc) returned ECC error
+jffs2: Empty flash at 0x00369f90 ends at 0x0036a000
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x7e0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fd08 bytes from 0x7e02f8) returned ECC error
+jffs2: Empty flash at 0x007f9a30 ends at 0x007fa000
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x800000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fc4c bytes from 0x8003b4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x820000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fda8 bytes from 0x820258) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x840000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fb4c bytes from 0x8404b4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x860000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fe60 bytes from 0x8601a0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x880000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1feb8 bytes from 0x880148) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x8a0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fee8 bytes from 0x8a0118) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x8c0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f968 bytes from 0x8c0698) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x8e0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1ff2c bytes from 0x8e00d4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x900000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fb04 bytes from 0x9004fc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x920000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f864 bytes from 0x92079c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x940000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fb98 bytes from 0x940468) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x960000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fbc4 bytes from 0x96043c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x980000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f8d0 bytes from 0x980730) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x9a0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fa20 bytes from 0x9a05e0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x9c0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f908 bytes from 0x9c06f8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x9e0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fa58 bytes from 0x9e05a8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0xa00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f978 bytes from 0xa00688) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0xa20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fdc4 bytes from 0xa2023c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0xa40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fe5c bytes from 0xa401a4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0xa60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f9f4 bytes from 0xa6060c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0xe00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fef4 bytes from 0xe0010c) returned ECC error
+jffs2: Empty flash at 0x00e01148 ends at 0x00e01800
+jffs2: Empty flash at 0x00e08b14 ends at 0x00e09000
+jffs2: Empty flash at 0x00e10314 ends at 0x00e10800
+jffs2: Empty flash at 0x00e17af4 ends at 0x00e18000
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1840000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fe1c bytes from 0x18401e4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1900000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f870 bytes from 0x1900790) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1ba0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f950 bytes from 0x1ba06b0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1bc0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fa60 bytes from 0x1bc05a0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1be0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fba4 bytes from 0x1be045c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1c00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1c20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f9f8 bytes from 0x1c20608) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1c40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fb94 bytes from 0x1c4046c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1c60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fcf0 bytes from 0x1c60310) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1c80000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fc9c bytes from 0x1c80364) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1ca0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1cc0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f994 bytes from 0x1cc066c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1ce0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1d00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fd0c bytes from 0x1d002f4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1d20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1d40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fb30 bytes from 0x1d404d0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1d60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fc98 bytes from 0x1d60368) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1d80000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f818 bytes from 0x1d807e8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1da0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fec0 bytes from 0x1da0140) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1dc0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fe34 bytes from 0x1dc01cc) returned ECC error
+macb fffc4000.ethernet eth0: link up (100/Full)
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1de0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fdf0 bytes from 0x1de0210) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1e00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fb94 bytes from 0x1e0046c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1e20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fdc0 bytes from 0x1e20240) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1e40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1ff34 bytes from 0x1e400cc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1e60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fc68 bytes from 0x1e60398) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1e80000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fac8 bytes from 0x1e80538) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1ea0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fb44 bytes from 0x1ea04bc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1ec0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fba0 bytes from 0x1ec0460) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1ee0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f87c bytes from 0x1ee0784) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1f00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f990 bytes from 0x1f00670) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1f20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fcec bytes from 0x1f20314) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1f40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f990 bytes from 0x1f40670) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1f60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fc20 bytes from 0x1f603e0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1f80000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fea4 bytes from 0x1f8015c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1fa0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fd38 bytes from 0x1fa02c8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x100 bytes from 0x1fc0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1ff1c bytes from 0x1fc00e4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x154 bytes from 0xe006ac) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1fc0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x790 bytes from 0x1fc0070) returned ECC error
+mkdir: can't cron die ECC read failed, status = 0x000000e1
+eajffs2: mtd->read(0x71c bytes from 0x1fc00e4) returned ECC error
+te directory '/mnt/datas/lib': File exists
+mounting database partition... done.
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x538 bytes from 0x1fa02c8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1fa0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x190 bytes from 0x1f80670) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x6a4 bytes from 0x1f8015c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1f80000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x420 bytes from 0x1f603e0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1f60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x190 bytes from 0x1f40670) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1f40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x4ec bytes from 0x1f20314) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1f20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x190 bytes from 0x1f00670) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1f00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x7c bytes from 0x1ee0784) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1ee0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3a0 bytes from 0x1ec0460) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1ec0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x344 bytes from 0x1ea04bc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1ea0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x2c8 bytes from 0x1e80538) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1e80000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x34c bytes from 0x1da04b4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5b0 bytes from 0x1da0250) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x6ac bytes from 0x1e40154) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3a0 bytes from 0x1e20460) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1b8 bytes from 0x1e60648) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x734 bytes from 0x1e400cc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x778 bytes from 0x1e40088) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x7bc bytes from 0x1e40044) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1e40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x44 bytes from 0x1e400cc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x240 bytes from 0x1e605c0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x284 bytes from 0x1e6057c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x2c8 bytes from 0x1e60538) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x468 bytes from 0x1e60398) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1e60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x44 bytes from 0x1e605c0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x180 bytes from 0x1e60680) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1fc bytes from 0x1e60604) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x638 bytes from 0x1e401c8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x6f0 bytes from 0x1e40110) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0xe4 bytes from 0x1e4071c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5fc bytes from 0x1e40204) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x67c bytes from 0x1e40184) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x428 bytes from 0x1e203d8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x46c bytes from 0x1e20394) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x4b0 bytes from 0x1e20350) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x4f4 bytes from 0x1e2030c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x7bc bytes from 0x1e20044) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x44 bytes from 0x1e203d8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x538 bytes from 0x1e202c8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x57c bytes from 0x1e20284) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5c0 bytes from 0x1e20240) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x784 bytes from 0x1e2007c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1e20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x44 bytes from 0x1e202c8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x32c bytes from 0x1e204d4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3e4 bytes from 0x1e2041c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x2f8 bytes from 0x1e20508) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x370 bytes from 0x1e20490) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x394 bytes from 0x1e0046c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1e00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5f0 bytes from 0x1de0210) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1de0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x634 bytes from 0x1dc01cc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1dc0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x638 bytes from 0x1da01c8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x67c bytes from 0x1da0184) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x6c0 bytes from 0x1da0140) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1da0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x44 bytes from 0x1da01c8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3d4 bytes from 0x1da042c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x418 bytes from 0x1da03e8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x45c bytes from 0x1da03a4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x57c bytes from 0x1da0284) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5f4 bytes from 0x1da020c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x44 bytes from 0x1da042c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x310 bytes from 0x1da04f0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x390 bytes from 0x1da0470) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x818 bytes from 0x1d807e8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1d80000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x498 bytes from 0x1d60368) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1d60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x330 bytes from 0x1d404d0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1d40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x7a8 bytes from 0x1d20058) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1d20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x50c bytes from 0x1d002f4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1d00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1ce0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x194 bytes from 0x1cc066c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1cc0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1ca0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x49c bytes from 0x1c80364) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1c80000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x4f0 bytes from 0x1c60310) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1c60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x394 bytes from 0x1c4046c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1c40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f8 bytes from 0x1c20608) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1c20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1c00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3a4 bytes from 0x1be045c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1be0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x260 bytes from 0x1bc05a0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1bc0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x150 bytes from 0x1ba06b0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1ba0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x320 bytes from 0x18404e0) returned ECC error
+jffs2: notice: (428) check_node_data: wrong data CRC in data node at 0x00e0f8a8: read 0x8e4082e4, calculated 0xc55deb3a.
+jffs2: notice: (428) check_node_data: wrong data CRC in data node at 0x00e080a8: read 0x8e4082e4, calculated 0xc55deb3a.
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x124 bytes from 0xe006dc) returned ECC error
+jffs2: notice: (428) check_node_data: wrong data CRC in data node at 0x00e006dc: read 0x8e4082e4, calculated 0x4dba3a08.
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0xe0 bytes from 0x8a0720) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x24c bytes from 0x8a05b4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3a8 bytes from 0x8a0458) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x544 bytes from 0x8a02bc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x6e8 bytes from 0x8a0118) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x8a0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x38 bytes from 0x8807c8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1cc bytes from 0x880634) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x374 bytes from 0x88048c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x514 bytes from 0x8802ec) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x6b8 bytes from 0x880148) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x880000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x198 bytes from 0x860668) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x324 bytes from 0x8604dc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x4b8 bytes from 0x860348) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x660 bytes from 0x8601a0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x860000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x48 bytes from 0x3607b8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x170 bytes from 0x360690) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x284 bytes from 0x36057c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3b0 bytes from 0x360450) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x57c bytes from 0x360284) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x724 bytes from 0x3600dc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x360000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x1f4 bytes from 0xa6060c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0xa60000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3fc bytes from 0xa40404) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x65c bytes from 0xa401a4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0xa40000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0xc8 bytes from 0xa20738) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x350 bytes from 0xa204b0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5c4 bytes from 0xa2023c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0xa20000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x178 bytes from 0xa00688) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0xa00000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x258 bytes from 0x9e05a8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x9e0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x108 bytes from 0x9c06f8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x9c0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x220 bytes from 0x9a05e0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x9a0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0xd0 bytes from 0x980730) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x758 bytes from 0x9800a8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x980000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x3c4 bytes from 0x96043c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x960000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x398 bytes from 0x940468) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x75c bytes from 0x9400a4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x940000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x64 bytes from 0x92079c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x750 bytes from 0x9200b0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x920000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x304 bytes from 0x9004fc) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x900000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x28 bytes from 0x8e07d8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x72c bytes from 0x8e00d4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x8e0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x168 bytes from 0x8c0698) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x8c0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x34c bytes from 0x8404b4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x840000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5a8 bytes from 0x820258) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x820000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x7c bytes from 0x800784) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x44c bytes from 0x8003b4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x800000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x508 bytes from 0x7e02f8) returned ECC error
+jffs2: notice: (428) check_node_data: wrong data CRC in data node at 0x00e173a0: read 0xde696fe9, calculated 0xd90f0ea.
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x7e0000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x400 bytes from 0x1840400) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x510 bytes from 0x18402f0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x61c bytes from 0x18401e4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x748 bytes from 0x18400b8) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0x1840000) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x24c bytes from 0xe005b4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x34c bytes from 0xe004b4) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x478 bytes from 0xe00388) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5ac bytes from 0xe00254) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x6f4 bytes from 0xe0010c) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x800 bytes from 0xe00000) returned ECC error
+ln: /usr/local/lib: No such file or directory
+stoping busybox watchdog... killall: watchdog: no process killed
+done.
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x34c bytes from 0x1da04b4) returned ECC error
+/etc/init.d/S30evse: rc.local: line 90: collectd: not found
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x5b0 bytes from 0x1da0250) returned ECC error
+Starting network...
+killall: mini_httpd_armv5l: no process killed
+ip: RTNETLINK answers: File exists
+Starting sshd: OK
+
+Welcome to Filpilote
+filpilote login: on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x310 bytes from 0x1da04f0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x44 bytes from 0x1da04f0) returned ECC error
+on die ECC read failed, status = 0x000000e1
+jffs2: mtd->read(0x699 bytes from 0x1da0534) returned ECC error
+./mini_httpd_armv5l: started as root without requesting chroot(), warning only
+random: nonblocking pool is initialized
+[6~[5~[6~[6~
+
+
+cmd: echo 1 > /sys/bus/iio/devices/iio:device0/buffer/enable
+output:
+# drivers/iio/adc/at91_adc.c:547/at91_adc_configure_trigger
+drivers/iio/adc/at91_adc.c:520/at91_adc_get_trigger_value_by_name
+
+cmd: ./set_pwm 0 1000000000 1000000
+output:
+
+# drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt

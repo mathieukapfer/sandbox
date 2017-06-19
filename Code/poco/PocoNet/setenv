@@ -1,0 +1,2 @@
+ export POCO_DIR=/home/user/Projects/websocket_poc/webserver/externals/poco/x86
+ export LD_LIBRARY_PATH=$POCO_DIR/lib

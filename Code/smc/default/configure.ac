@@ -1,0 +1,14 @@
+AC_INIT([charger_ve], [1.0], [mka07744@open-groupe.com])
+AC_CANONICAL_TARGET
+AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_SILENT_RULES(yes)
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([
+  Makefile
+])
+AC_OUTPUT
+

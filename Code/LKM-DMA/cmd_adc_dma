@@ -1,0 +1,67 @@
+ cd dev/
+
+ rmmod hello_adc_dma.ko
+ tftp -g -r hello_adc_dma.ko 192.168.0.76
+ insmod hello_adc_dma.ko
+ dmesg
+
+ cat /sys/class/adc_dma_class/adc_dma/enable
+ cat /sys/class/adc_dma_class/adc_dma/buffer
+ echo 1 > /sys/class/adc_dma_class/adc_dma/enable
+ rmmod hello_adc_dma.ko
+
+======================
+ echo 0 > /sys/class/adc_dma_class/adc_dma/enable
+ echo 0 > /sys/bus/iio/devices/iio\:device0/buffer/enable
+ echo 0 > /sys/bus/iio/devices/iio\:device0/trigger/current_trigger
+======================
+
+tftp -g -r at91_adc_with_pdc.ko 192.168.0.76
+insmod at91_adc_with_pdc.ko
+
+# init cpw
+echo 1 > /sys/class/pwm/pwmchip6/export
+echo 1000000 > /sys/class/pwm/pwmchip6/pwm1/period
+echo 550000 >  /sys/class/pwm/pwmchip6/pwm1/duty_cycle
+echo 1 > /sys/class/pwm/pwmchip6/pwm1/enable
+
+# disable adc trigger
+echo 0 > /sys/bus/iio/devices/iio\:device0/buffer/enable
+echo 0 >/sys/bus/iio/devices/iio\:device0/trigger/current_trigger
+
+# init adc
+insmod at91_adc_with_pdc.ko
+echo 0 > /sys/bus/iio/devices/iio\:device0/buffer/enable
+
+     echo  1 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage0_en
+     echo  1 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage1_en
+     echo  1 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage2_en
+     echo  1 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage3_en
+
+cat /sys/bus/iio/devices/trigger2/name > /sys/bus/iio/devices/iio\:device0/trigger/current_trigger
+echo 1 > /sys/bus/iio/devices/iio\:device0/buffer/enable
+
+# generic buffer setup
+./generic_buffer -n fffe0000.adc -t fffe0000.adc-dev0-timer-counter-2 -l 1 -c 10
+
+
+
+# rmmod
+echo 0 > /sys/bus/iio/devices/iio\:device0/buffer/enable
+     echo  0 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage0_en
+     echo  0 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage1_en
+     echo  0 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage2_en
+     echo  0 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage3_en
+echo 0 > /sys/bus/iio/devices/iio\:device0/trigger/current_trigger
+rmmod at91_adc_with_pdc.ko
+
+# adc one shot
+cat  /sys/bus/iio/devices/iio\:device0/in_voltage3_raw
+cat  /sys/bus/iio/devices/iio\:device0/in_voltage3_raw
+cat  /sys/bus/iio/devices/iio\:device0/in_voltage3_raw
+cat  /sys/bus/iio/devices/iio\:device0/in_voltage3_raw
+
+# switch buffer / one shot
+echo 0 > /sys/bus/iio/devices/iio\:device0/buffer/enable
+cat  /sys/bus/iio/devices/iio\:device0/in_voltage3_raw
+echo 1 > /sys/bus/iio/devices/iio\:device0/buffer/enable

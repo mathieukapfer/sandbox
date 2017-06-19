@@ -1,0 +1,30 @@
+==== in order to boot on /tftpboot   =====
+
+==== copy/past this command on uboot =====
+
+set bootargs rootfstype=ext2 mem=128M console=ttyS0,115200 initrd=0x22800000,20M root=/dev/ram0 rw ramdisk_size=32768
+
+set serverip 192.168.0.76
+
+setenv bootcmd 'tftp 0x21100000 uImage.parkingboard_v2_1; nand read.jffs2 0x22800000 0x00280000 0x00C00000; bootm 0x21100000'
+
+boot
+
+==== replace the first line above with this one  ====
+==== in order to enable debug level on startup   ====
+
+set bootargs rootfstype=ext2 mem=128M console=ttyS0,115200 debug initrd=0x22800000,20M root=/dev/ram0 rw ramdisk_size=32768
+
+
+==== new bsp (UBI FS) ======
+set bootargs mem=128M console=ttyS0,115200 
+
+
+set serverip 192.168.0.76
+
+setenv bootcmd 'tftp 0x21100000 uImage.parkingboard_v2_1; bootm 0x21100000'
+
+boot
+
+
+

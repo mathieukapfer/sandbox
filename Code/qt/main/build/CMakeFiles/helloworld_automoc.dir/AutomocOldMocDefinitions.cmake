@@ -1,0 +1,1 @@
+set(AM_OLD_COMPILE_SETTINGS "QT_CORE_LIB;QT_NO_DEBUG ~~~ /home/user/Projects/websocket_poc/webserver/externals/qt/x86/include;/home/user/Projects/websocket_poc/webserver/externals/qt/x86/include/QtCore;/home/user/Projects/websocket_poc/webserver/externals/qt/x86/./mkspecs/linux-g++-32 ~~~  ~~~ FALSE ~~~ ")

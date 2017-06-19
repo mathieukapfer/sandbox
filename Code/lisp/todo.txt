@@ -1,0 +1,17 @@
+mathieu@debian-mathieu:~/Projects/ev_link_charger$ find . -name "*.el"
+./code/evse/src/aSlaveModel/smc-merge-transition.el
+./code/evse/src/aSlaveModel/replace-string.el
+./code/evse/src/aSlaveModel/smc-beautifuller.el
+./code/evse/src/aSlaveModel/format_name.el
+./code/evse/src/aSlaveModel/cmd.el
+./code/evse/src/aSlaveModel/my-utils.el
+./code/evse/src/aSlaveModel/coding_rule.el
+./code/evse/src/cpw/smc-merge-transition.el
+./code/evse/src/cpw/smc-beautifuller.el
+./code/evse/src/cpw/cmd.el
+./code/evse/src/ocpp/test/wireshark_log/indent-xml.el
+./code/evse/src/ocpp/test/wireshark_log/remove-binary-char.el
+./code/evse/src/ocpp/test/wireshark_log/replace-sring.el
+./code/evse/src/aHermesModel/cmd.el
+./code/libmodbus/libmodbus-2.1.0/.dir-locals.el
+./code/components/curl/curl-7.21.2/curl-style.el

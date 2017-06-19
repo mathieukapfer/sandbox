@@ -1,0 +1,8 @@
+  /home/user/git/emacs/Code/qt/object3:
+  total used in directory 44 available 51953584
+  drwxr-xr-x 2 mathieu user 4096 Jun 28 17:45 .
+  drwxr-xr-x 8 mathieu user 4096 Jun 28 17:43 ..
+  -rw-r--r-- 1 mathieu user  456 Jun 28 17:45 CMakeLists.txt
+  -rw-r--r-- 1 mathieu user  874 Jun 28 17:43 log.h
+  -rw-r--r-- 1 mathieu user  283 Jun 28 17:43 Test.cpp
+  -rw-r--r-- 1 mathieu user  384 Jun 28 17:43 Test.h

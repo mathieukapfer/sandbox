@@ -1,0 +1,56 @@
+prepare:
+---------
+apt-cache search linux-headers-$(uname -r)
+sudo apt-get install linux-headers-3.16.0-4-amd64
+
+source:
+-------
+Makefile
+hello.c
+
+compile
+-------
+make
+
+output
+-------
+hello.ko
+
+cmd
+----
+  sudo insmod hello.ko
+  lsmod
+  lsmod | grep hello
+  /sbin/modinfo hello.ko
+  sudo cat /var/log/kern.log
+  sudo rmmod hello.ko
+  sudo insmod hello.ko name=Toto
+  sudo cat /var/log/kern.log
+
+  dmesg | grep -i hello
+  
+magic number
+---------------
+
+[host]
+mathieu@debian-mathieu:~/Code/LKM$ /sbin/modinfo hello.ko 
+filename:       /home/user/Code/LKM/hello.ko
+version:        0.1
+description:    A simple Linux driver for the BBB.
+author:         Derek Molloy
+license:        GPL
+srcversion:     0DD9FE0DE42157F9221E608
+depends:        
+vermagic:       4.4.14 SMP mod_unload modversions ARMv7 p2v8 
+parm:           name:The name to display in /var/log/kern.log (charp)
+
+[target]
+# insmod hello.ko 
+insmod: can't insert 'hello.ko': invalid module format
+
+# dmesg  | grep hello
+hello: version magic '4.4.14 SMP mod_unload modversions ARMv7 p2v8 ' should be '4.4.14 ARMv5 p2v8 '
+hello: version magic '4.4.14 SMP mod_unload modversions ARMv7 p2v8 ' should be '4.4.14 ARMv5 p2v8 '
+# 
+
+

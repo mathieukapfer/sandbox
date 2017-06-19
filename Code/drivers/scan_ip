@@ -1,0 +1,218 @@
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2016-11-14 10:28 CET
+Nmap scan report for 192.168.0.5
+Host is up (0.0023s latency).
+Not shown: 994 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+1500/tcp open  vlsi-lm
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+8080/tcp open  http-proxy
+
+Nmap scan report for 192.168.0.6
+Host is up (0.0024s latency).
+Not shown: 994 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+1500/tcp open  vlsi-lm
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+8080/tcp open  http-proxy
+
+Nmap scan report for 192.168.0.9
+Host is up (0.0022s latency).
+Not shown: 995 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+23/tcp   open  telnet
+80/tcp   open  http
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+
+Nmap scan report for 192.168.0.10
+Host is up (0.0019s latency).
+Not shown: 995 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+23/tcp   open  telnet
+80/tcp   open  http
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+
+Nmap scan report for 192.168.0.13
+Host is up (0.0024s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+
+Nmap scan report for 192.168.0.14
+Host is up (0.0023s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+
+Nmap scan report for 192.168.0.30
+Host is up (0.0023s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+
+Nmap scan report for 192.168.0.31
+Host is up (0.0025s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+
+Nmap scan report for 192.168.0.41
+Host is up (0.0024s latency).
+Not shown: 995 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+23/tcp   open  telnet
+80/tcp   open  http
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+
+Nmap scan report for 192.168.0.43
+Host is up (0.0020s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap scan report for 192.168.0.49
+Host is up (0.0027s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+111/tcp  open  rpcbind
+1501/tcp open  sas-3
+
+Nmap scan report for 192.168.0.50
+Host is up (0.0026s latency).
+Not shown: 991 closed ports
+PORT      STATE SERVICE
+21/tcp    open  ftp
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+445/tcp   open  microsoft-ds
+5357/tcp  open  wsdapi
+6789/tcp  open  ibm-db2-admin
+49152/tcp open  unknown
+49153/tcp open  unknown
+49154/tcp open  unknown
+
+Nmap scan report for 192.168.0.51
+Host is up (0.0026s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+111/tcp  open  rpcbind
+1501/tcp open  sas-3
+
+Nmap scan report for 192.168.0.76
+Host is up (0.0014s latency).
+Not shown: 999 closed ports
+PORT    STATE SERVICE
+111/tcp open  rpcbind
+
+Nmap scan report for 192.168.0.77
+Host is up (0.0014s latency).
+Not shown: 992 closed ports
+PORT      STATE SERVICE
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+445/tcp   open  microsoft-ds
+5357/tcp  open  wsdapi
+6789/tcp  open  ibm-db2-admin
+49152/tcp open  unknown
+49153/tcp open  unknown
+49154/tcp open  unknown
+
+Nmap scan report for 192.168.0.99
+Host is up (0.0021s latency).
+Not shown: 999 closed ports
+PORT    STATE SERVICE
+111/tcp open  rpcbind
+
+Nmap scan report for 192.168.0.102
+Host is up (0.0017s latency).
+Not shown: 995 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+23/tcp   open  telnet
+80/tcp   open  http
+1501/tcp open  sas-3
+1503/tcp open  imtc-mcs
+
+Nmap scan report for 192.168.0.104
+Host is up (0.0028s latency).
+Not shown: 991 closed ports
+PORT      STATE SERVICE
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+445/tcp   open  microsoft-ds
+5357/tcp  open  wsdapi
+6789/tcp  open  ibm-db2-admin
+49152/tcp open  unknown
+49153/tcp open  unknown
+49154/tcp open  unknown
+49155/tcp open  unknown
+
+Nmap scan report for 192.168.0.111
+Host is up (0.0019s latency).
+Not shown: 999 closed ports
+PORT    STATE SERVICE
+111/tcp open  rpcbind
+
+Nmap scan report for 192.168.0.156
+Host is up (0.0022s latency).
+Not shown: 990 closed ports
+PORT      STATE SERVICE
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+445/tcp   open  microsoft-ds
+902/tcp   open  iss-realsecure
+912/tcp   open  apex-mesh
+5357/tcp  open  wsdapi
+6789/tcp  open  ibm-db2-admin
+49152/tcp open  unknown
+49153/tcp open  unknown
+49154/tcp open  unknown
+
+Nmap scan report for 192.168.0.157
+Host is up (0.0022s latency).
+Not shown: 998 closed ports
+PORT    STATE SERVICE
+22/tcp  open  ssh
+111/tcp open  rpcbind
+
+Nmap scan report for FVS318N (192.168.0.230)
+Host is up (0.0023s latency).
+Not shown: 992 filtered ports
+PORT      STATE  SERVICE
+22/tcp    closed ssh
+23/tcp    open   telnet
+80/tcp    open   http
+443/tcp   open   https
+1723/tcp  closed pptp
+8080/tcp  closed http-proxy
+49152/tcp closed unknown
+49153/tcp closed unknown
+
+Nmap done: 256 IP addresses (22 hosts up) scanned in 11.60 seconds

@@ -1,0 +1,6 @@
+0x00000000	at91_adc_pdc_stop_rx	/home/user/Code/LKM-DMA/at91_adc_with_pdc	EXPORT_SYMBOL
+0x00000000	at91_adc_rx_from_pdc	/home/user/Code/LKM-DMA/at91_adc_with_pdc	EXPORT_SYMBOL
+0x00000000	at91_adc_pdc_start_rx	/home/user/Code/LKM-DMA/at91_adc_with_pdc	EXPORT_SYMBOL
+0x00000000	at91_adc_pdc_init	/home/user/Code/LKM-DMA/at91_adc_with_pdc	EXPORT_SYMBOL
+0x00000000	at91_adc_pdc_exit	/home/user/Code/LKM-DMA/at91_adc_with_pdc	EXPORT_SYMBOL
+0x00000000	at91_dump_dma_region	/home/user/Code/LKM-DMA/at91_adc_with_pdc	EXPORT_SYMBOL

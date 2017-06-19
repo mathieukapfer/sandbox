@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# paramters
+target=192.168.0.190
+dest=/mnt/datas/opt/mod
+file=pwm-atmel-tcb-cpw.ko
+
+# main
+echo scp $file root@$target:$dest
+sshpass -p 'Cpw1=se=' scp $file root@$target:$dest

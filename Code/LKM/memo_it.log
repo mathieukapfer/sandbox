@@ -1,0 +1,88 @@
+mathieu@debian-mathieu:~$ ssh root@192.168.0.190
+root@192.168.0.190's password: 
+# cat /proc/interrupts 
+           CPU0       
+ 16:      45104  atmel-aic   1 Level     pmc, at91_tick, rtc0, ttyS0
+ 17:          0       PMC   0 Level     main_osc
+ 18:          0       PMC   1 Level     clk-plla
+ 19:          0       PMC   2 Level     clk-pllb
+ 20:          0       PMC   3 Level     clk-master
+ 32:        941  atmel-aic  21 Level     eth0
+ 34:          6  atmel-aic  12 Level     fffc8000.spi
+ 35:          0  atmel-aic   5 Edge      at91_adc
+Err:          0
+# 
+# 
+# echo  1 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage0_en
+# echo  1 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage1_en
+# echo  1 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage2_en
+# echo  1 > /sys/bus/iio/devices/iio\:device0/scan_elements/in_voltage3_en
+# 
+# cat /sys/bus/iio/devices/trigger0/name > /sys/bus/iio/devices/iio\:device0/trigger/current_trigger 
+# cat /proc/interrupts 
+           CPU0       
+ 16:      49972  atmel-aic   1 Level     pmc, at91_tick, rtc0, ttyS0
+ 17:          0       PMC   0 Level     main_osc
+ 18:          0       PMC   1 Level     clk-plla
+ 19:          0       PMC   2 Level     clk-pllb
+ 20:          0       PMC   3 Level     clk-master
+ 32:       1111  atmel-aic  21 Level     eth0
+ 34:          6  atmel-aic  12 Level     fffc8000.spi
+ 35:          0  atmel-aic   5 Edge      at91_adc
+Err:          0
+# echo 1 > /sys/bus/iio/devices/iio:device0/buffer/enable
+# cat /proc/interrupts 
+           CPU0       
+ 16:      54202  atmel-aic   1 Level     pmc, at91_tick, rtc0, ttyS0
+ 17:          0       PMC   0 Level     main_osc
+ 18:          0       PMC   1 Level     clk-plla
+ 19:          0       PMC   2 Level     clk-pllb
+ 20:          0       PMC   3 Level     clk-master
+ 32:       1236  atmel-aic  21 Level     eth0
+ 34:          6  atmel-aic  12 Level     fffc8000.spi
+ 35:          0  atmel-aic   5 Edge      at91_adc
+132:          0  fffe0000.adc-dev0-timer-counter-0 Edge      fffe0000.adc_consumer0
+Err:          0
+# hexdump /dev/iio\:device0
+^C
+# ./set_pwm 0 100000000 10000000
+-bash: ./set_pwm: not found
+# cd /mnt/datas/testbsp/
+# ./set_pwm 0 100000000 10000000
+enter in /sys/class/pwm/pwmchip0
+device     export     npwm       power      pwm0       subsystem  uevent     unexport
+enter in /sys/class/pwm/pwmchip0/pwm0
+set period first
+period____:100000000ns
+duty_cycle:10000000ns
+# ./generic_buffer -n fffe0000.adc -t fffe0000.adc-dev0-timer-counter-0 -l 2 -c 10
+iio device number being used is 0
+iio trigger number being used is 48
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+33.000000 33.000000 33.000000 34.000000 
+# Write failed: Broken pipe
+mathieu@debian-mathieu:~$ 
+mathieu@debian-mathieu:~$ ssh root@192.168.0.190
+root@192.168.0.190's password: 
+# cd /mnt/datas/
+# ls
+fixed_ip                        opt                             rc.local
+hello.ko                        pwm-atmel-tcb-parking.ko        testbsp
+lib                             pwm-atmel-tcb-parking.ko.basic  usr
+# 
+
+=========================================================
+
+# echo 1 > /sys/bus/iio/devices/iio:device0/buffer/enable
+
+drivers/iio/adc/at91_adc.c:582:at91_adc_configure_trigger:called
+drivers/iio/adc/at91_adc.c:555:at91_adc_get_trigger_value_by_name:called

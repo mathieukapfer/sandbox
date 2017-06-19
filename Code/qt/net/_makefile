@@ -1,0 +1,23 @@
+QT_DIR=/usr/local/Qt-5.7.0
+CXXFLAGS= -I$(QT_DIR)/include -std=c++11  -fPIC -DQT_NO_VERSION_TAGGING
+LDFLAGS= -L$(QT_DIR)/lib -lQt5Core -lQt5Network
+
+all:TcpClient TcpServer
+
+TcpClient: TcpClient.cpp
+
+TcpServer: TcpServer.cpp TcpServer.h	main.cpp
+
+test:TcpClient TcpServer
+	LD_LIBRARY_PATH=$(QT_DIR)/lib ./TcpServer &
+	sleep 1
+	netstat --tcp -ln | grep 8080
+	sleep 3
+	LD_LIBRARY_PATH=$(QT_DIR)/lib ./TcpClient
+
+
+env:
+	export LD_LIBRARY_PATH=$(QT_DIR)/lib
+
+qmake:
+	/home/user/Projects/qt5/qt5/qtbase/bin/qmake

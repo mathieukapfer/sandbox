@@ -1,0 +1,185 @@
+==================
+Compile buildroot
+==================
+
+# first time
+
+cd <buildroot>
+make parkingboard_mp2_defconfig
+make
+
+# recompile device tree
+make linux-rebuild
+
+# put the uimage in /tftpboot
+cp output/build/linux-4.4.14/arch/arm/boot/uImage.parkingboard_v2_1 /tftpboot/
+
+
+# recompile avec nouvelle target (=> file system)
+ 2063  rm -rf output/target/
+ 2064  ls -l output/build/parkingboard-1.0/
+ 2065  ls -al output/build/parkingboard-1.0/
+ 2067  find output/build/ -name .stamp_target_installed -exec rm {} \;
+ 2068  find output/build/ -name .stamp_target_installed
+
+===========================================
+Changement de conf + svg
+===========================================
+make menuconfig
+make savedefconfig
+
+===========================================
+Preparation support/compile des modules
+===========================================
+
+cp board/atmel/parkingboard/linux-4.4.config output/build/linux-4.4.14/.config
+cd output/build/linux-4.4.14
+make ARCH=arm CROSS_COMPILE=armv5l-linux- menuconfig => activer le support des modules kernel
+make ARCH=arm CROSS_COMPILE=armv5l-linux-
+make ARCH=arm CROSS_COMPILE=armv5l-linux- modules
+make ARCH=arm CROSS_COMPILE=armv5l-linux- LOADADDR=0x20008000  uImage
+
+cd -
+make
+
+==> ls -l output/build/linux-4.4.14/arch/arm/boot
+drwxr-xr-x 2 mathieu user    4096 Jun 24 19:18 bootp
+drwxr-xr-x 2 mathieu user    4096 Aug 17 17:07 compressed
+drwxr-xr-x 3 mathieu user   69632 Aug 17 17:07 dts
+-rwxr-xr-x 1 mathieu user 3995040 Aug 17 17:07 Image
+-rw-r--r-- 1 mathieu user    1648 Jun 24 19:18 install.sh
+-rw-r--r-- 1 mathieu user    3137 Jun 24 19:18 Makefile
+-rw-r--r-- 1 mathieu user 2019112 Aug 17 17:07 uImage.parkingboard_v2_1 <----
+-rw-r--r-- 1 mathieu user 2019048 Aug 17 17:07 zImage.parkingboard_v2_1 <----
+
+cd output/build/linux-4.4.14/arch/arm/boot
+scp uImage.parkingboard_v2_1 root@192.168.0.197:/tmp
+
+NOTE : in case of checksum error, take serial link and catch prompt under uboot
+then retry image directly with tftp:
+
+# with UBIFS
+set bootargs 'mem=128M console=ttyS0,115200'
+set serverip 192.168.0.76
+setenv bootcmd 'tftp 0x21100000 uImage.parkingboard_v2_1; bootm 0x21100000'
+boot
+
+# with JFFS2 (old)
+set serverip <your ip>
+setenv bootcmd 'tftp 0x21100000 uImage.parkingboard_v2_1; nand read.jffs2 0x22800000 0x00280000 0x00C00000; bootm 0x21100000'
+boot
+
+
+SUR LA TARGET
+==================
+flash_eraseall /dev/mtd5
+flashcp -v /tmp/uImage.parkingboard_v2_1 /dev/mtd5
+
+NOTE :
+In case of error below :
+
+# flashcp -v /tmp/uImage.parkingboard_v2_1 /dev/mtd5
+Erasing blocks: 16/16 (100%)
+Writing data: 1973k/0k (1973%)
+While writing data to 0x001ec800-0x001ed4a0 on /dev/mtd5: Invalid argument
+
+=> Force to use busybox :
+ cd /bin
+ ls
+ ln -s busybox flashcp
+
+==================== TIPS ===========================
+
+arboresence :
+-------------------
+buildroot        (./)
+ - linux         (./output/build/linux-4.4.14)
+ - busybox
+ - packages
+
+Choix driver en module kernel ou inclus dans le kernel
+-------------------------------------------------------
+cd <build-root>
+make linux-menuconfig
+
+(equivalent à <à verifier>
+cd ./output/build/linux-4.4.14
+make ARCH=arm CROSS_COMPILE=armv5l-linux- menuconfig)
+
+─────────────────────────────────────────────────────────────────────────
+.config - Linux/arm 4.4.14 Kernel Configuration
+ > Device Drivers > Industrial I/O support > Analog to digital converters
+─────────────────────────────────────────────────────────────────────────
+ <M> module
+ ...
+
+TIPS : Use '/' to search a string in config
+
+modif/restoration de conf
+--------------------------
+ev_link_bsp@bspv5_port/output/build/linux-4.4.14$
+
+ 2078  cp ../../../board/atmel/parkingboard/linux-4.4.config .config
+ 2079  make ARCH=arm CROSS_COMPILE=armv5l-linux- menuconfig
+
+
+
+device tree
+--------------------------
+source :
+~/Projects/bsp/ev_link_bsp/board/atmel/parkingboard/parkingboard_v2_1.dts
+
+(include:
+~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/arch/arm/boot/dts/at91sam9260.dtsi
+)
+
+compile intermediaire (merge, preprocessing) :
+~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/arch/arm/boot/dts/.parkingboard_v2_1.dtb.dts.tmp
+
+
+Visible in the target !
+> hexdump -C /proc/device-tree/ahb/apb/#address-cells
+
+
+
+--------------------------------
+creation patch kernel/driver
+--------------------------------
+
+ - create reference
+ ----------------------
+cp ~/Projects/bsp/ev_link_bsp/dl/linux-4.4.14.tar.xz ~/tmp/
+cd ~/tmp/; tar xvf linux-4.4.14.tar.xz
+
+ - edit conf if necessary
+ ----------------------
+make linux-menuconfig  => enable new driver (according to change done on KConfig file)
+make linux-savedefconfig
+meld output/build/linux-4.4.14/defconfig board/atmel/parkingboard/linux-4.4.config => copy the change
+
+ - create the patch
+ ----------------------
+ - add new files manually as void file (to easy the patch generation)
+touch ~/tmp/linux-4.4.14/drivers/pwm-atmel-tcb-cpw.c
+touch ~/tmp/linux-4.4.14/drivers/clk/at91/safety_control.c
+
+ - create the diff
+cd output/build/linux-4.4.14
+diff -ur ~/tmp/linux-4.4.14 . > ../my.patch
+
+ - clean the patch
+cat my.patch | grep -v Only > my2.patch
+
+ - add the patch to buildroot
+cp my2.patch ../../board/atmel/parkingboard/linux-kernel-4.4.14-parking-board-drivers.patch
+
+ - add the patch in platform script
+
+---------------------- configs/parkingboard_mp2_defconfig ----------------------
+index 0045ad6..53f4ff8 100644
+@@ -9,7 +9,7 @@ BR2_TARGET_GENERIC_ISSUE="Welcome to Filpilote"
+ BR2_LINUX_KERNEL=y
+ BR2_LINUX_KERNEL_CUSTOM_VERSION=y
+ BR2_LINUX_KERNEL_CUSTOM_VERSION_VALUE="4.4.14"
+-BR2_LINUX_KERNEL_PATCH="$(TOPDIR)/board/atmel/parkingboard/linux-kernel-4.4.14-bspv5.patch"
++BR2_LINUX_KERNEL_PATCH="$(TOPDIR)/board/atmel/parkingboard/linux-kernel-4.4.14-bspv5.patch $(TOPDIR)/board/atmel/parkingboard/linux-kernel-4.4.14-parking-board-drivers.patch"

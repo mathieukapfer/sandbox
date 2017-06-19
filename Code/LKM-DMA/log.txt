@@ -1,0 +1,92 @@
+adc_dma: init in progress
+Here I am: /home/user/Code/LKM-DMA/hello_adc_dma.c:426 - INFO
+Here I am: /home/user/Code/LKM-DMA/hello_adc_dma.c:426 - NOTICE
+Here I am: /home/user/Code/LKM-DMA/hello_adc_dma.c:426 - WARNING
+Here I am: /home/user/Code/LKM-DMA/hello_adc_dma.c:426 - ERR
+Here I am: /home/user/Code/LKM-DMA/hello_adc_dma.c:426 - CRIT
+Here I am: /home/user/Code/LKM-DMA/hello_adc_dma.c:426 - ALERT
+I'm trashed; giving up - EMERG
+adc_dma: cdev registered correctly with number [251,0]
+adc_dma_class device class registered correctly
+adc_dma: iomem done
+write at 100: 26ccd400
+write at 104: 200
+write at 110: 27b83200
+write at 114: 200
+adc_dma: init doneERROR: evse watchdog running is 0.
+BSPv5 watchdog trigger in 60 s
+
+reg[0x100]:0x26ccd400
+reg[0x104]:0x200
+reg[0x108]:0x0
+reg[0x10c]:0x0
+reg[0x110]:0x27b83200
+reg[0x114]:0x200
+reg[0x118]:0x0
+reg[0x11c]:0x0
+reg[0x120]:0x0
+reg[0x124]:0x0
+head:0x0, tail:0x0
+enable_store called with 1 - start dma rx !
+write at 120: 1
+reg[0x100]:0x27b83600
+reg[0x104]:0x0
+reg[0x108]:0x0
+reg[0x10c]:0x0
+reg[0x110]:0x27b83200
+reg[0x114]:0x0
+reg[0x118]:0x0
+reg[0x11c]:0x0
+reg[0x120]:0x0
+reg[0x124]:0x1
+head:0xeb6200, tail:0x0
+c6ccd400:256 [0x100]
+write at 110: 26ccd400
+write at 114: 200
+head:0xff14a202, tail:0x0
+c7b83200:256 [0x100]
+write at 110: 27b83200
+write at 114: 200
+Unable to handle kernel NULL pointer dereference at virtual address 000001d2
+pgd = c6c44000
+[000001d2] *pgd=27ad4831, *pte=00000000, *ppte=00000000
+Internal error: Oops: 1 [#1] ARM
+Modules linked in: hello_adc_dma(O)
+CPU: 0 PID: 422 Comm: netstat Tainted: G           O    4.4.14 #17
+Hardware name: Atmel AT91SAM9
+task: c7a23460 ti: c6dc2000 task.ti: c6dc2000
+PC is at sock_i_ino+0x2c/0x44
+LR is at unix_seq_show+0x70/0x120
+pc : [<c0211864>]    lr : [<c0282e70>]    psr: 20000013
+sp : c6dc3e70  ip : 000000b0  fp : c7b83400
+r10: 00000000  r9 : 00000000  r8 : 00000000
+r7 : c6d2aac0  r6 : 00000001  r5 : b6f63000  r4 : c7b83400
+r3 : c6dc2000  r2 : 00000200  r1 : 00000200  r0 : 00000196
+Flags: nzCv  IRQs on  FIQs on  Mode SVC_32  ISA ARM  Segment none
+Control: 0005317f  Table: 26c44000  DAC: 00000051
+Process netstat (pid: 422, stack limit = 0xc6dc2190)
+Stack: (0xc6dc3e70 to 0xc6dc4000)
+3e60:                                     c7b83400 c0282e70 00000000 00000000
+3e80: 00000002 00000001 000003f0 c007ec84 00000400 b6f63000 00000000 000000b0
+3ea0: c6dc3f88 c6c999a0 c6d2aac0 c009de10 c6d2aaf0 c0075128 3c400001 00000000
+3ec0: 52c00001 00000000 00100077 c7906f40 a0000013 00000001 b6f63000 c000a2a4
+3ee0: c6dc2000 00000000 00000000 c00c0a78 c6c999a0 c00c0a08 c6dc3f88 c0082bc4
+3f00: 00000077 00000000 00001000 00000022 000b6f63 00000007 c79bc1a0 c00768c8
+3f20: 000b6f63 01c9c38e 00000001 c0782134 50e7ce42 c79bc1d4 00000000 c6c999a0
+3f40: c6dc3f88 00000400 b6f63000 b6f63000 c6c999a0 c6dc3f88 b6f63000 c0083220
+3f60: c6c999a0 b6f63000 00000400 c6c999a0 c6c999a0 00000400 b6f63000 c000a2a4
+3f80: c6dc2000 c00839a8 00000000 00000000 00000400 000cc0b8 000cc0b8 00000000
+3fa0: 00000003 c000a100 000cc0b8 000cc0b8 00000003 b6f63000 00000400 00000000
+3fc0: 000cc0b8 000cc0b8 00000000 00000003 00000001 000b2752 00000000 00000000
+3fe0: 00000000 bea4bc7c b6e60684 b6eb8c3c 60000010 00000003 00000000 00000000
+[<c0211864>] (sock_i_ino) from [<c0282e70>] (unix_seq_show+0x70/0x120)
+[<c0282e70>] (unix_seq_show) from [<c009de10>] (seq_read+0x2b8/0x400)
+[<c009de10>] (seq_read) from [<c00c0a78>] (proc_reg_read+0x70/0x84)
+[<c00c0a78>] (proc_reg_read) from [<c0082bc4>] (__vfs_read+0x20/0xcc)
+[<c0082bc4>] (__vfs_read) from [<c0083220>] (vfs_read+0x84/0xec)
+[<c0083220>] (vfs_read) from [<c00839a8>] (SyS_read+0x40/0x80)
+[<c00839a8>] (SyS_read) from [<c000a100>] (ret_fast_syscall+0x0/0x38)
+Code: e5900158 e3a01c02 e3500000 01a04000 (1590403c)
+---[ end trace a02ee1b109c0637c ]---
+Kernel panic - not syncing: Fatal exception in interrupt
+---[ end Kernel panic - not syncing: Fatal exception in interrupt

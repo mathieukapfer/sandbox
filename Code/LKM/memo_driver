@@ -1,0 +1,487 @@
+io mem
+-------
+Reservation d'espace memoroire pour un driver:
+
+Code:
+struct resource *request_mem_region(unsigned long start, unsigned long len,
+                                    char *name);
+ioreamp(...)
+
+Info =>
+
+# cat /proc/iomem 
+002fc000-00303fff : 2fc000.sram
+20000000-27ffffff : System RAM
+  20008000-2038d743 : Kernel code
+  203ba000-203ef41f : Kernel data
+40000000-4fffffff : /ahb/nand@40000000
+fffa0000-fffa00ff : /ahb/apb/timer@fffa0000
+fffb0000-fffb01ff : atmel_serial
+fffb4000-fffb41ff : atmel_serial
+fffbc000-fffbffff : /ahb/apb/ssc@fffbc000
+fffc4000-fffc40ff : /ahb/apb/ethernet@fffc4000
+fffc8000-fffc81ff : /ahb/apb/spi@fffc8000
+fffdc000-fffdc0ff : /ahb/apb/timer@fffdc000
+fffe0000-fffe00ff : /ahb/apb/adc@fffe0000
+fffff200-fffff3ff : atmel_serial
+fffff400-fffff5ff : /ahb/apb/pinctrl@fffff400/gpio@fffff400
+ff
+
+== tc atmel ==
+
+iomem:
+fffa0000-fffa00ff : /ahb/apb/timer@fffa0000
+
+device tree: (~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/arch/arm/boot/dts/at91sam9260.dtsi)
+			tcb0: timer@fffa0000 {
+				compatible = "atmel,at91rm9200-tcb";
+				reg = <0xfffa0000 0x100>;
+				interrupts = <17 IRQ_TYPE_LEVEL_HIGH 0
+					      18 IRQ_TYPE_LEVEL_HIGH 0
+					      19 IRQ_TYPE_LEVEL_HIGH 0>;
+				clocks = <&tc0_clk>, <&tc1_clk>, <&tc2_clk>, <&clk32k>;
+				clock-names = "t0_clk", "t1_clk", "t2_clk", "slow_clk";
+			};
+
+
+~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/drivers/misc/atmel_tclib.c
+  .compatible = "atmel,at91rm9200-tcb",
+  static int __init tc_probe(struct platform_device *pdev)
+  => export 'atmel_tc_alloc'
+
+-----------
+
+~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/drivers/pwm/pwm-atmel-tcb.c
+  => use 'atmel_tc_alloc'
+	{ .compatible = "atmel,tcb-pwm", },
+  module_platform_driver(atmel_tcb_pwm_driver);
+
+device tree: (~/Projects/bsp/ev_link_bsp/board/atmel/parkingboard/parkingboard_v2_1.dts)
+
+ tcb0_pwm {
+  compatible = "atmel,tcb-pwm";
+  #pwm-cells = <3>;
+  tc-block = <0>;
+  fp1-gpios = <&pioC 9 0>;     <====== pin = PC9  (column I/O Line of 9.3.3 PIO Controller C Mux)
+  sw2-gpios = <&pioC 7 0>;
+  sw1-gpios = <&pioC 6 0>;
+  pinctrl-names = "default";
+  pinctrl-0 = <&pinctrl_tcb0_tiob0 <== fct = PERIPH_B (see below)
+               &pinctrl_tcb0_tiob1
+               &pinctrl_tcb0_tiob2>;
+ };
+
+~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/arch/arm/boot/dts/at91sam9260.dtsi
+...
+          pinctrl_tcb0_tiob0: tcb0_tiob0-0 {
+						atmel,pins = <AT91_PIOC 9 AT91_PERIPH_B AT91_PINCTRL_NONE>;
+					};
+
+
+static const struct pwm_ops atmel_tcb_pwm_ops = {
+	.request = atmel_tcb_pwm_request,
+	.free = atmel_tcb_pwm_free,
+	.config = atmel_tcb_pwm_config,
+	.set_polarity = atmel_tcb_pwm_set_polarity,
+	.enable = atmel_tcb_pwm_enable,
+	.disable = atmel_tcb_pwm_disable,
+	.owner = THIS_MODULE,
+};
+
+ 	ret = pwmchip_add(&atmel_pwm->chip);
+------------
+
+	err = clk_prepare_enable(tc->slow_clk);
+
+-----------
+
+/home/user/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/drivers/pwm/core.c
+EXPORT_SYMBOL_GPL(pwmchip_add);
+ pwmchip_add ->  pwmchip_add_with_polarity
+ {
+ ...	pwmchip_sysfs_export(chip);
+ }
+
+./pwm/core.c:287:	pwmchip_sysfs_export(chip);
+./pwm/sysfs.c:324:void pwmchip_sysfs_export(struct pwm_chip *chip)
+
+
+void pwmchip_sysfs_export(struct pwm_chip *chip)
+{
+	struct device *parent;
+
+	/*
+	 * If device_create() fails the pwm_chip is still usable by
+	 * the kernel its just not exported.
+	 */
+	parent = device_create(&pwm_class, chip->dev, MKDEV(0, 0), chip,
+			       "pwmchip%d", chip->base); // <========================== number = base !!!
+	if (IS_ERR(parent)) {
+		dev_warn(chip->dev,
+			 "device_create failed for pwm_chip sysfs export\n");
+	}
+}
+
+# ls /sys/class/pwm
+pwmchip0  pwmchip6   <========================== number = base !!!
+
+---
+/sys/class/pwm/pwmchipX/pwmY ==>
+
+static ssize_t export_store(struct device *parent,
+			    struct device_attribute *attr,
+			    const char *buf, size_t len)
+{
+	struct pwm_chip *chip = dev_get_drvdata(parent);
+	struct pwm_device *pwm;
+	unsigned int hwpwm;
+	int ret;
+
+	ret = kstrtouint(buf, 0, &hwpwm);
+	if (ret < 0)
+		return ret;
+
+	if (hwpwm >= chip->npwm)
+		return -ENODEV;
+
+	pwm = pwm_request_from_chip(chip, hwpwm, "sysfs"); // core.c ====> hum !!!
+ =====>	pwm = &chip->pwms[index];
+      	err = pwm_device_request(pwm, label);
+ =======>	if (..) { err = pwm->chip->ops->request(pwm->chip, pwm); ...  }
+
+	if (IS_ERR(pwm))
+		return PTR_ERR(pwm);
+
+	ret = pwm_export_child(parent, pwm); // ===> /sys/class/pwm/pwmchipX/pwmY (ci-dessus)
+	if (ret < 0)
+		pwm_put(pwm);
+
+	return ret ? : len;
+}
+static DEVICE_ATTR_WO(export);
+
+sysfs.c
+static int pwm_export_child(struct device *parent, struct pwm_device *pwm)
+{
+	struct pwm_export *export;
+	int ret;
+...
+  dev_set_name(&export->child, "pwm%u", pwm->hwpwm);
+	ret = device_register(&export->child);
+}
+
+
+
+
+=== ADC ====
+Trigger
+0 0 0 TIOA Ouput of the Timer Counter Channel 0
+0 0 1 TIOA Ouput of the Timer Counter Channel 1
+0 1 0 TIOA Ouput of the Timer Counter Channel 2
+
+9.3.1 PIO Controller A Multiplexing
+tcb0 (timer counter block 0) 
+tcb0 (timer counter block 1)
+
+9.4.5 Timer Counter
+-  Two blocks of three 16-bit Timer Counter channels
+Note: TC Block 0 (TC0, TC1, TC2) and TC Block 1 (TC3, TC4, TC5) have identical user interfaces.
+See Figure 7-1,“SAM9G20 Memory Mapping,” on page 26 for TC Block 0 and TC Block 1 base addresses.
+
+0xFFFA 0000 TC0 ,TC1, TC2 (TC block 0)
+0xFFFD C000 TC3, TC4, TC5 (TC block 1)
+
+			adc0: adc@fffe0000 {
+				#address-cells = <1>;
+				#size-cells = <0>;
+				compatible = "atmel,at91sam9260-adc";
+				reg = <0xfffe0000 0x100>;
+				interrupts = <5 IRQ_TYPE_LEVEL_HIGH 0>;
+				clocks = <&adc_clk>, <&adc_op_clk>;
+				clock-names = "adc_clk", "adc_op_clk";
+				atmel,adc-use-external-triggers;
+				atmel,adc-channels-used = <0xf>;
+				atmel,adc-vref = <3300>;
+				atmel,adc-startup-time = <15>;
+				atmel,adc-res = <8 10>;
+				atmel,adc-res-names = "lowres", "highres";
+				atmel,adc-use-res = "highres";
+
+
+~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/./drivers/iio/adc/at91_adc.c:1397:	{ .compatible = "atmel,at91sam9260-adc", .data = &at91sam9260_caps
+
+
+# cat /proc/interrupts 
+           CPU0       
+ 16:      62211  atmel-aic   1 Level     pmc, at91_tick, rtc0, ttyS0
+ 17:          0       PMC   0 Level     main_osc
+ 18:          0       PMC   1 Level     clk-plla
+ 19:          0       PMC   2 Level     clk-pllb
+ 20:          0       PMC   3 Level     clk-master
+ 32:       1440  atmel-aic  21 Level     eth0
+ 34:          6  atmel-aic  12 Level     fffc8000.spi
+ 35:          0  atmel-aic   5 Level     at91_adc
+Err:          0
+
+# cat /proc/stat | grep intr
+intr 73175 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 71583 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1586 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+----------------------------
+drivers/iio/adc/at91_adc.c:1131/at91_adc_probe
+drivers/iio/adc/at91_adc.c:863/at91_adc_probe_dt
+drivers/iio/adc/at91_adc.c:734/at91_adc_of_get_resolution
+iio iio:device0: Resolution used: 10 bits
+iio iio:device0: not support touchscreen in the adc compatible string.
+at91_adc fffe0000.adc: Master clock is set as: 92000000 Hz, adc_clk should set as: 5000000 Hz
+drivers/iio/adc/at91_adc.c:786/calc_startup_ticks_9260
+drivers/iio/adc/at91_adc.c:464/at91_adc_channel_init
+drivers/iio/adc/at91_adc.c:674/at91_adc_buffer_init
+drivers/iio/adc/at91_adc.c:624/at91_adc_trigger_init
+drivers/iio/adc/at91_adc.c:603/at91_adc_allocate_trigger
+drivers/iio/adc/at91_adc.c:603/at91_adc_allocate_trigger
+drivers/iio/adc/at91_adc.c:603/at91_adc_allocate_trigger
+drivers/iio/adc/at91_adc.c:603/at91_adc_allocate_trigger
+
+cmd: echo 1 > /sys/bus/iio/devices/iio:device0/buffer/enable
+output:
+# drivers/iio/adc/at91_adc.c:547/at91_adc_configure_trigger
+drivers/iio/adc/at91_adc.c:520/at91_adc_get_trigger_value_by_name
+
+cmd: ./set_pwm 0 1000000000 1000000
+output:
+
+# drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+drivers/iio/adc/at91_adc.c:351/at91_adc_rl_interrupt
+---------------------------
+
+static int at91_adc_buffer_init(struct iio_dev *idev)
+{ LOG_ENTER;
+	return iio_triggered_buffer_setup(idev, &iio_pollfunc_store_time,
+		&at91_adc_trigger_handler, NULL);
+}
+
+static irqreturn_t at91_adc_trigger_handler(int irq, void *p)
+	for (i = 0; i < idev->masklength; i++) {
+... st->buffer[j] = at91_adc_readl(st, AT91_ADC_CHAN(st, i)); ...
+	}
+
+	iio_push_to_buffers_with_timestamp(idev, st->buffer, pf->timestamp);
+
+	iio_trigger_notify_done(idev->trig);
+
+	/* Needed to ACK the DRDY interruption */
+	at91_adc_readl(st, AT91_ADC_LCDR);
+
+	enable_irq(st->irq);
+}
+
+/* Handler for classic adc channel eoc trigger */
+static void handle_adc_eoc_trigger(int irq, struct iio_dev *idev)
+{ LOG_ENTER;
+	struct at91_adc_state *st = iio_priv(idev);
+
+	if (iio_buffer_enabled(idev)) {
+		disable_irq_nosync(irq);
+		iio_trigger_poll(idev->trig); <============================= !!!
+	} else {
+		st->last_value = at91_adc_readl(st, AT91_ADC_CHAN(st, st->chnb));
+		st->done = true;
+		wake_up_interruptible(&st->wq_data_avail);
+	}
+}
+
+static irqreturn_t at91_adc_rl_interrupt(int irq, void *private)
+{ LOG_ENTER;
+	struct iio_dev *idev = private;
+	struct at91_adc_state *st = iio_priv(idev);
+	u32 status = at91_adc_readl(st, st->registers->status_register);
+	unsigned int reg;
+
+	status &= at91_adc_readl(st, AT91_ADC_IMR);
+	if (status & GENMASK(st->num_channels - 1, 0))
+		handle_adc_eoc_trigger(irq, idev);  <=============================== !!!!
+
+-----------------------------
+
+   ret = request_irq(st->irq, at91_adc_rl_interrupt, 0,
+				  pdev->dev.driver->name, idev);
+
+~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/include/linux/interrupt.h
+/*
+ * These correspond to the IORESOURCE_IRQ_* defines in
+ * linux/ioport.h to select the interrupt line behaviour.  When
+ * requesting an interrupt without specifying a IRQF_TRIGGER, the
+ * setting should be assumed to be "as already configured", which
+ * may be as per machine or firmware initialisation.
+ */
+#define IRQF_TRIGGER_NONE	0x00000000
+#define IRQF_TRIGGER_RISING	0x00000001
+#define IRQF_TRIGGER_FALLING	0x00000002
+#define IRQF_TRIGGER_HIGH	0x00000004
+#define IRQF_TRIGGER_LOW	0x00000008
+#define IRQF_TRIGGER_MASK	(IRQF_TRIGGER_HIGH | IRQF_TRIGGER_LOW | \
+				 IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING)
+#define IRQF_TRIGGER_PROBE	0x00000010
+
+
+=== I2C
+
+			i2c0: i2c@fffac000 {
+      
+				compatible = "atmel,at91sam9260-i2c";
+				reg = <0xfffac000 0x100>;
+				interrupts = <11 IRQ_TYPE_LEVEL_HIGH 6>;
+				#address-cells = <1>;
+				#size-cells = <0>;
+				clocks = <&twi0_clk>;
+				status = "disabled";
+			};
+
+~/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/drivers/i2c/busses/i2c-at91.c:871:		.compatible = "atmel,at91sam9260-i2c",
+
+
+
+=== ===
+io
+=== ===
+
+// mem access
+// ---------------------------------------
+#define AT91SAM9260_BASE_TC3		0xfffdc000
+#define AT91_TC_CMR		0x04		/* Channel Mode Register */
+
+#define at91_tc3_readl(reg) \
+	(readl_relaxed(tc3_base + reg))
+
+static void __iomem *tc3_base;
+
+  // Prepare access to memory
+  request_mem_region(AT91SAM9260_BASE_TC3, 0x40, "hello_tc3");
+  tc3_base = ioremap(AT91SAM9260_BASE_TC3, 0x40);
+
+==> KO as io already used by timer driver (see above)
+
+-------------------------
+ Use 'atmel_tc_alloc'
+
+#include <linux/atmel_tc.h>
+
+init:
+	int tcblock;
+	tc = atmel_tc_alloc(tcblock);
+	if (tc == NULL) {
+		dev_err(&pdev->dev, "failed to allocate Timer Counter Block\n");
+		return -ENOMEM;
+	}
+  ...
+  tcbpwm->tc = tc;
+
+release:
+	atmel_tc_free(tc);
+
+usage:
+	struct atmel_tc *tc = tcbpwmc->tc;
+	void __iomem *regs = tc->regs;
+
+	cmr = __raw_readl(regs + ATMEL_TC_REG(group, CMR));
+	__raw_writel(cmr, regs + ATMEL_TC_REG(group, CMR));
+
+
+=== === === === === === === === === === === === === === === === === === === === === === === === === 
+=== Char driver
+=== === === === === === === === === === === === === === === === === === === === === === === === === 
+
+----------------------
+-- Register dev object 
+----------------------
+
+EXPORT_SYMBOL from :
+/home/user/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14/fs/char_dev.c
+
+    cdev_init(...)
+ 
+    // Major number allocation
+    // ------------------------------
+    // static
+    result = register_chrdev_region(MKDEV(scull_major, scull_minor), scull_nr_devs, "scull");
+    // dynamic (ask the kernel to a available major version)
+    result = alloc_chrdev_region(&dev, scull_minor, scull_nr_devs,
+    
+    cdev_add(...)
+
+NOTE : The old way (p75 ldd3)
+
+     register_chrdev(I2C_MAJOR, "i2c", &i2cdev_fops);
+
+NOTE : - read number:
+      MAJOR(dev_t dev);
+      MINOR(dev_t dev);
+      
+       - write number
+      MKDEV(int major, int minor);
+
+      => kdev_t.h
+       9 #define MAJOR(dev)      ((unsigned int) ((dev) >> MINORBITS))
+      10 #define MINOR(dev)      ((unsigned int) ((dev) & MINORMASK))
+      11 #define MKDEV(ma,mi)    (((ma) << MINORBITS) | (mi))
+
+NOTE :
+     Major number is visible on 'cat /proc/module
+     >cat /proc/devices
+     Character devices:
+  1 mem
+  2 pty
+  3 ttyp
+  4 /dev/vc/0
+  4 tty
+...
+128 ptm
+136 pts
+251 my_module  <-------------
+252 watchdog
+253 iio
+254 rtc
+
+> dmesg
+EBB: Hello world from the BBB LKM!
+Here I am: /home/user/Code/LKM/hello.c:94 - DEBUG 
+Here I am: /home/user/Code/LKM/hello.c:94 - INFO 
+Here I am: /home/user/Code/LKM/hello.c:94 - NOTICE
+Here I am: /home/user/Code/LKM/hello.c:94 - WARNING
+Here I am: /home/user/Code/LKM/hello.c:94 - ERR
+Here I am: /home/user/Code/LKM/hello.c:94 - CRIT
+Here I am: /home/user/Code/LKM/hello.c:94 - ALERT
+I'm trashed; giving up - EMERG
+
+----------------------
+-- Create /dev entry 
+----------------------
+> mknod /dev/my_modul0 c 251 0
+> echo toto > /dev/my_modul0
+
+best script in ldd3 p65
+
+----------------------
+-- Check log
+----------------------
+> dmesg
+my_module: cdev initialization completed [251,0]
+my_module: opened file
+my_module: write called
+my_module: closed file
+
+> cat /var/log/messages => do the same
+
+NOTE : 
+# ps | grep log
+  425 root     /sbin/syslogd -n
+  427 root     /sbin/klogd -n
+
+enable DBG level:
+> echo 8 > /proc/sys/kernel/printk
+

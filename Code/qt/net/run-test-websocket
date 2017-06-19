@@ -1,0 +1,16 @@
+#/bin/csh
+
+QT_DIR=/usr/local/Qt-5.7.0
+
+echo ==== Start server =====
+LD_LIBRARY_PATH=$QT_DIR/lib ./websocketserver/websocketserver -d &
+sleep 1
+#netstat --tcp -ln | grep 8080
+echo ==== Start client =====
+LD_LIBRARY_PATH=$QT_DIR/lib ./websocketclient/websocketclient -d &
+sleep 1
+LD_LIBRARY_PATH=$QT_DIR/lib ./websocketclient/websocketclient -d &
+sleep 1
+LD_LIBRARY_PATH=$QT_DIR/lib ./websocketclient/websocketclient -d 
+sleep 1
+killall websocketserver

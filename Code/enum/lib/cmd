@@ -1,0 +1,2 @@
+gcc -c -fpic ClassWithEnum.cpp
+gcc -shared -o libEnum 

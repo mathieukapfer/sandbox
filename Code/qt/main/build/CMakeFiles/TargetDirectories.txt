@@ -1,0 +1,2 @@
+/home/user/git/emacs/Code/qt/main/build/CMakeFiles/helloworld.dir
+/home/user/git/emacs/Code/qt/main/build/CMakeFiles/helloworld_automoc.dir

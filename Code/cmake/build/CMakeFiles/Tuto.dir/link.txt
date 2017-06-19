@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/Tuto.dir/toto.cpp.o  -o Tuto -rdynamic 

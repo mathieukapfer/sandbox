@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/helloworld.dir/main.cpp.o CMakeFiles/helloworld.dir/helloworld_automoc.cpp.o  -o helloworld -rdynamic /home/user/Projects/websocket_poc/webserver/externals/qt/x86/lib/libQt5Core.so.5.6.0 -Wl,-rpath,/home/user/Projects/websocket_poc/webserver/externals/qt/x86/lib 

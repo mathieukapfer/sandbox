@@ -1,0 +1,75 @@
+***************************************
+First, please read the README.txt file
+***************************************
+
+--------------------------------------------
+===== Compilation =====
+--------------------------------------------
+
+--------------------------------------------
+==== How to compile on host (i686) ====
+--------------------------------------------
+
+  * First you should prepare your host by installing linux headers
+
+<code>
+apt-cache search linux-headers-$(uname -r)
+sudo apt-get install linux-headers-3.16.0-4-amd64
+</code>
+
+  * Second, take this makefile template that compile an 'hello.c' module
+<file make Makefile>
+obj-m+=hello.o
+
+all:
+	make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules
+
+clean:
+	make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
+</file>
+
+  * Finally, type ''make''
+
+--------------------------------------------
+==== How to cross compile for a target  ====
+--------------------------------------------
+
+  * Get the kernel sources of your target - use ''buildroot''
+  * Install the toolchain on your host 
+  * Prepare the kernel sources
+  <code>
+  cd <buildroot>/output/build/linux-4.4.14
+  make ARCH=arm CROSS_COMPILE=armv5l-linux- menuconfig ===>  <Enable the support for module kernel>
+  make ARCH=arm CROSS_COMPILE=armv5l-linux- 
+  make ARCH=arm CROSS_COMPILE=armv5l-linux- modules
+  </code>  
+  * Take the makefile template below and customize ''KDIR'' and ''CROSS_COMPILE''
+  
+<file make Makefile>
+obj-m+=hello.o
+
+CROSS_COMPILE   = armv5l-linux-
+ARCH            = arm
+CC              = $(CROSS_COMPILE)gcc
+KDIR            = /home/user/Projects/bsp/ev_link_bsp/output/build/linux-4.4.14
+PWM             = `pwd`
+
+modules:
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(PWD) $@
+
+clean:
+	rm -rf *.o *.ko *.mod.c *.cmd .*.cmd  .tmp_versions Module.symvers
+</file>
+  
+
+--------------------------------------------
+==== How to install driver kernel object (.ko file) ====
+--------------------------------------------
+In a root terminal or by prefix with ''sudo'', try the following command 
+  * ''insmod'' to insert our module
+  * ''lsmod''  to get a list of modules present on the system
+  * ''rmmod''  to remove the module
+
+--------------------------------------------
+==== Check the magic number ====
+--------------------------------------------

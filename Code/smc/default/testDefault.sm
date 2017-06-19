@@ -1,0 +1,32 @@
+%class   TestDefault
+%header  TestDefault.h
+%start   init::Waiting
+
+//%include type_model.h
+
+%map init
+%%
+
+Waiting
+{
+  waiting nil { say("stay here");}
+}
+
+Default
+{
+  goMaintenance [ ctxt.displayState() ] push(maintenance::Maintenance) {
+    say("go to maintenance");
+  }
+}
+
+%%
+
+%map maintenance
+%%
+
+Maintenance
+{
+  goBack pop { say("back to main");}
+}
+
+%%

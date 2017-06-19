@@ -1,0 +1,20 @@
+
+sources files
+---------------
+at91_adc.c          : patched to work with peripherical dma controler (DMA)
+pwm-atmel-tcb-cpw.c : patched to
+                        - disable SW1 trigger (TIOB2) => disable HW sample blocker
+                        - create dedicated ADC trigger (TIOA2) to fix HW front end delay
+at91_adc_pdc.c      : primitive to work with PDC of ADC
+
+object file:
+----------------------
+at91_adc_with_pdc.ko : compilation of at91_adc.c + pwm-atmel-tcb-cpw.c
+
+
+development step
+-------------------
+pwm-atmel-tcb-cpw.c.ref   : original file from linux baseline (pwm-atmel-tcb-cpw.c)
+at91_adc_ref.c            : original file from linux baseline (at91_adc.c)
+at91_adc_noIRQ.c          : disable 1kHz interruption
+hello_adc_dma.c           : play with dma transfer

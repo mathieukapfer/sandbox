@@ -1,0 +1,25 @@
+%map common
+%%
+
+Init
+Entry { sayEntry("Common Init"); }
+Exit { sayExit("Common Init"); }
+{
+  leaveInit Finish {}
+  //goInside  push(prod::Inside) {}
+  goInside  InsideSubmap/push(prod::Inside) {}
+}
+
+InsideSubmap
+Entry { sayEntry("InsideSubmap"); }
+Exit { sayExit("InsideSubmap"); }
+{
+}
+
+
+Finish
+{
+  backToInit Init {} 
+}
+
+%%

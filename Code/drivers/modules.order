@@ -1,0 +1,6 @@
+kernel//home/user/Projects/bsp_custom/evlink_charger_bsp_custom_for_pb/documentation/drivers/at91_adc.ko
+kernel//home/user/Projects/bsp_custom/evlink_charger_bsp_custom_for_pb/documentation/drivers/hello.ko
+kernel//home/user/Projects/bsp_custom/evlink_charger_bsp_custom_for_pb/documentation/drivers/hello_sysfs.ko
+kernel//home/user/Projects/bsp_custom/evlink_charger_bsp_custom_for_pb/documentation/drivers/hello_platform.ko
+kernel//home/user/Projects/bsp_custom/evlink_charger_bsp_custom_for_pb/documentation/drivers/pwm-atmel-tcb-cpw.ko
+kernel//home/user/Projects/bsp_custom/evlink_charger_bsp_custom_for_pb/documentation/drivers/safety_control.ko

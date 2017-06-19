@@ -1,0 +1,25 @@
+%class   TestA
+%header  TestA.h
+%start   common::Init
+%package ProdA
+
+//%include type_model.h
+
+%map prod
+%%
+
+Inside
+{
+    goState2 InsideState2 { say("go to sub state 2");}
+}
+
+InsideState2
+{    
+}
+
+Default
+{
+  goBack pop { say("back to main");}
+}
+
+%%
