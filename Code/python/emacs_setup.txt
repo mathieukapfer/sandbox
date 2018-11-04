@@ -1,0 +1,11 @@
+https://realpython.com/emacs-the-best-python-editor/#installation-and-basics
+
+> under terminal
+pip install jedi
+
+
+> under emacs
+packages-install-package elpy
+> ... and then ...
+(elpy-enable)
+
