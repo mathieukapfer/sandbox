@@ -1,15 +1,29 @@
 
 https://realpython.com/emacs-the-best-python-editor/
 
+== elpy ==
+= on emacs =
+package:     elpy
+enable:      elpy-mode
+check setup: elpy-config
+
+C-c C-c : send bufffer to python
+
+= on terminal =
+pip install rope jedi importmagic autopep8 flake8
+
+== TODO
+check code navigation
+check doc navigation
+check/set flycheck
+
 == usefull: ==
 
 elpy-goto-definition
 xref-pop-marker-stack
 
 
-== elpy ==
-
-(elpy-config)
+== elpy config detail ==
 
 (elpy-mode)
 
