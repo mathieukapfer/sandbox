@@ -11,6 +11,8 @@ xref-pop-marker-stack
 
 (elpy-config)
 
+(elpy-mode)
+
 => autoload-do-load: Symbol’s value as variable is void: xref-location-marker
 https://github.com/jorgenschaefer/elpy/issues/1298
 FWIW, I had the same problem (migrated to new version of Emacs with old init.el file) and
