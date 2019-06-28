@@ -1,0 +1,88 @@
+
+https://realpython.com/emacs-the-best-python-editor/
+
+== elpy ==
+= on emacs =
+package:     elpy
+enable:      elpy-mode
+check setup: elpy-config
+
+C-c C-c : send bufffer to python
+
+= on terminal =
+pip install rope jedi importmagic autopep8 flake8
+
+== TODO
+check code navigation
+check doc navigation
+check/set flycheck
+
+== usefull: ==
+
+elpy-goto-definition
+xref-pop-marker-stack
+
+
+== elpy config detail ==
+
+(elpy-mode)
+
+=> autoload-do-load: Symbol’s value as variable is void: xref-location-marker
+https://github.com/jorgenschaefer/elpy/issues/1298
+FWIW, I had the same problem (migrated to new version of Emacs with old init.el file) and
+was able to solve it by simply deleting the *.elc files in the .emacs.d directory.
+No need to re-install anything.
+
+==> ok !
+
+Elpy Configuration
+
+Virtualenv........: None
+RPC Python........: 2.7.13 (/usr/bin/python)
+Interactive Python: python (/usr/bin/python)
+Emacs.............: 25.1.1
+Elpy..............: 1.26.0
+Jedi..............: 0.13.1
+Rope..............: Not found
+Autopep8..........: Not found
+Yapf..............: Not found
+Black.............: Not found
+Syntax checker....: Not found (flake8)
+
+You have not activated a virtual env. While Elpy supports this, it is often a
+...
+...
+...
+
+
+== rope vs jedi ===
+
+Both Rope and Jedi offer features the other lacks. It would be interesting to use one or the other when the primary one lacks a feature, and use the backend selection only for when both support a feature.
+
+E.g. Rope supports retrieving a docstring, but does not support finding symbol occurrences, while Jedi does not know how to retrieve a docstring, but can easily find symbol occurrences.
+
+(https://github.com/jorgenschaefer/elpy/issues/329)
+
+====
+
+pip install rope jedi importmagic autopep8 flake8
+
+====
+
+Virtualenv........: None
+RPC Python........: 2.7.13 (/usr/bin/python)
+Interactive Python: python (/usr/bin/python)
+Emacs.............: 25.1.1
+Elpy..............: 1.26.0
+Jedi..............: 0.13.2
+Rope..............: 0.11.0
+Autopep8..........: 1.4.3
+Yapf..............: Not found
+Black.............: Not found
+Syntax checker....: Not found (flake8)
+
+====
+
+Add directory ~/.local/bin/ is PATH. ==>
+
+Syntax checker....: flake8 (/home/math/.local/bin/flake8)

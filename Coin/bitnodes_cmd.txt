@@ -1,0 +1,28 @@
+curl -H "Accept: application/json; indent=4" https://bitnodes.earn.com/pi/v1/snapshots/1546172592/ > snap.txt
+
+https://bitnodes.earn.com/api/
+
+LIST NODES
+List all reachable nodes from a snapshot.
+
+GET https://bitnodes.earn.com/api/v1/snapshots/<TIMESTAMP>/
+<TIMESTAMP> can be replaced with "latest" to get the list of all reachable nodes from the latest snapshot.
+
+Parameters:
+
+field (optional) - Specify field=coordinates to get the list of unique latitude and longitude pairs or field=user_agents to get the list of unique user agents instead of the full information listed below.
+Pagination parameters are not available for this endpoint, as it simply returns the raw snapshot from the export directory used by the crawler. Values in each array in the response represent the following information:
+
+Protocol version
+User agent
+Connected since
+Services
+Height
+Hostname
+City
+Country code
+Latitude
+Longitude
+Timezone
+ASN
+Organization name
