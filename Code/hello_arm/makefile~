@@ -1,0 +1,2 @@
+all:
+	rm hello; CXX=/usr/bin/arm-none-eabi-c++ make hello
